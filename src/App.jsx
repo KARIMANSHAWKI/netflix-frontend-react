@@ -1,7 +1,45 @@
-import './app.scss'
-import React from 'react'
-import {Home} from './pages/home/Home'
+import "./app.scss";
+import React from "react";
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import Watch from "./pages/watch/Watch";
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 export const App = () => {
-    return <Home />
-}
+  const user = false;
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          {user ? <Home /> : <Redirect to="/register" />}
+        </Route>
+        <Route path="/login">
+          {!user ? <Login /> : <Redirect to="/" />}
+          </Route>
+        <Route path="/register">
+          {!user ? <Register /> : <Redirect to="/" />}
+        </Route>
+        {user && (
+          <>
+            <Route path="/movies">
+              <Home type="movies" />
+            </Route>
+            <Route path="/series">
+              <Home type="series" />
+            </Route>
+            <Route path="/watch">
+              <Watch type="watch" />
+            </Route>
+          </>
+        )}
+      </Switch>
+    </Router>
+  );
+};
