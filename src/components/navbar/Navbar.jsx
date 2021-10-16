@@ -1,13 +1,13 @@
 import "./navbar.scss";
 import { useState } from "react";
 import { ArrowDropDown, Notifications, Search } from "@material-ui/icons";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   window.onscroll = () => {
-    setIsScrolled(window.pageYOffset == "0" ? false : true);
+    setIsScrolled(window.pageYOffset === "0" ? false : true);
     return () => window.onscroll == null;
   };
 
